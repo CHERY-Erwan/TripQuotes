@@ -1,0 +1,20 @@
+---
+description: PHP Style & Basic Structure
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## PHP coding standard
+  - name: "Follow Pint format standards"
+    description: "Ensure code follows Laravel Pint standards"
+    pattern: "function ([a-zA-Z_]+)\\("
+    instructions: |
+      - Follow PSR-12 coding standards
+      - Indent with 4 spaces
+      - Use snake_case for method names in tests
+      - Use camelCase for method names in classes
+      - Lines should not exceed 120 characters
+      - Add trailing commas in multiline arrays
+      - Order imports alphabetically
+      - Follow pint.json rules defined in project

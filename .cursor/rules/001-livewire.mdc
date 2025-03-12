@@ -1,0 +1,27 @@
+---
+description: Laravel & Livewire Patterns
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## Livewire Patterns
+  - name: "Prefer Volt class-based API for Livewire components"
+    description: "Use class-based Volt API instead of inline closures"
+    pattern: "new #\\[Layout\\('(.+)'\\)\\] class extends Component"
+    instructions: "Always use Volt class-based API with proper namespace imports and type hints"
+    
+  - name: "Follow Livewire Volt conventions"
+    description: "Use correct Volt structure for components"
+    instructions: |
+      Volt components should:
+      - Use #[Validate] attributes for form inputs
+      - Use wire:model and wire:submit directive correctly
+      - Handle form submission in dedicated methods
+      - Use redirects with navigate: true parameter
+
+  - name: "Use correct Flux components"
+    description: "Prefer Flux components over standard Blade components"
+    pattern: "<x-([a-z-]+)"
+    replacement: "<flux:$1"
+    excludes: ["<x-app-logo", "<x-placeholder-pattern", "<x-auth-", "<x-action-message"]

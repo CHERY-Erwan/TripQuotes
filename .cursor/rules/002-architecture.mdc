@@ -1,0 +1,68 @@
+---
+description: Architecture & Patterns
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## Architecture & Patterns
+  - name: "Follow DDD structure for new domains"
+    description: "Organize domain code following DDD patterns"
+    instructions: |
+      When creating new domain components, follow this organization:
+      - app/Domains/{DomainName}/Actions/ for service/use case classes
+      - app/Domains/{DomainName}/Data/ for DTOs using Spatie\LaravelData
+      - app/Domains/{DomainName}/Events/ for domain events (implements ShouldBeStored)
+      - app/Domains/{DomainName}/Exceptions/ for domain-specific exceptions
+      - app/Domains/{DomainName}/Projections/ for read models
+      - app/Domains/{DomainName}/Projectors/ for event handlers updating projections
+      - app/Domains/{DomainName}/{DomainName}AggregateRoot for event sourcing aggregates
+
+  - name: "Follow CQRS pattern"
+    description: "Implement Command Query Responsibility Segregation"
+    instructions: |
+      - Separate commands (write) from queries (read)
+      - Commands should live in app/Domains/{Domain}/Commands/
+      - Queries should live in app/Domains/{Domain}/Queries/
+      - Commands should return void or aggregate IDs
+      - Queries should be immutable and return DTOs/projections
+      - Use request objects as parameters
+      - Keep handlers focused on single responsibility
+      - Projectors should be used for read models
+      - Prefer dispatch() for commands and ask() for queries
+
+  - name: "Follow SOLID principles"
+    description: "Ensure code adheres to all SOLID principles"
+    instructions: |
+      - Single Responsibility Principle:
+        - Each class should have only one reason to change
+        - Keep classes focused on a single concern
+        - Limit class methods to those that directly support the class purpose
+        - Extract separate concerns into their own classes
+        - Aim for class sizes below 200 lines
+      
+      - Open/Closed Principle:
+        - Design classes to be open for extension but closed for modification
+        - Use interfaces or abstract classes for extension points
+        - Prefer composition over inheritance
+        - Use strategy pattern for variant behaviors
+      
+      - Liskov Substitution Principle:
+        - Subtypes must be substitutable for their base types
+        - Override methods must accept same parameters as base methods
+        - Override methods must not strengthen preconditions
+        - Override methods must not weaken postconditions
+        - Ensure inherited methods preserve invariants
+      
+      - Interface Segregation Principle:
+        - Create specific interfaces rather than general-purpose ones
+        - Keep interfaces focused and minimal
+        - Don't force clients to depend on methods they don't use
+        - Prefer multiple small interfaces over a single large one
+      
+      - Dependency Inversion Principle:
+        - High-level modules should not depend on low-level modules
+        - Both should depend on abstractions
+        - Abstractions should not depend on details
+        - Use dependency injection for external services
+        - Type-hint interfaces instead of concrete classes

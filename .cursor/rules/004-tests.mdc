@@ -1,0 +1,38 @@
+---
+description: Testing & Quality
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## Testing & Quality
+  - name: "Use Pest PHP for testing"
+    description: "Write tests using Pest PHP's functional approach"
+    instructions: |
+      - Use it() over function-based tests
+      - Group related tests with describe()
+      - Use pest()->extend(Tests\TestCase::class) for Laravel tests
+      - Use expects() for assertions
+      - Prefer test->each() for data providers
+      - Name tests descriptively: it('returns a successful response')
+      - Use pest-plugin-laravel assertions where appropriate
+
+  - name: "Generate tests for new code"
+    description: "Always include tests for newly generated code following AAA pattern"
+    instructions: |
+      - For every new class, generate a corresponding test file
+      - Use Pest PHP syntax for all tests
+      - Follow file naming convention: tests/[Unit|Feature]/{ClassPath}Test.php
+      - Always structure tests following AAA pattern:
+        1. Arrange: Set up test prerequisites and inputs
+        2. Act: Execute the code being tested
+        3. Assert: Verify the expected outcomes
+      - Use comments or spacing to visually separate AAA sections
+      - Tests should verify primary functionality of the code
+      - Include at least one positive and one negative test case
+      - For controllers/actions: test HTTP responses and side effects
+      - For repositories: test data access operations
+      - For services: test business logic execution
+      - For Livewire components: test lifecycle hooks and interactions
+      - For domain models: test invariants and business rules
+      - For CQRS: test commands and queries separately

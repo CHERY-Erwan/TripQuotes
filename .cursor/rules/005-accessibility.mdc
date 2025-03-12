@@ -1,0 +1,19 @@
+---
+description: Accessibility
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## Accessibility
+  - name: "Ensure accessibility in UI components"
+    description: "Generated UI code should follow accessibility best practices"
+    instructions: |
+      - Add aria-* attributes to interactive elements
+      - Include appropriate roles for custom elements
+      - Ensure color contrast meets WCAG standards
+      - Provide alt text for images
+      - Use semantic HTML elements
+      - Ensure keyboard navigability
+      - Add labels to form elements
+      - Use heading structure appropriately

@@ -1,0 +1,56 @@
+---
+description: Package Usage
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## Package Usage
+  - name: "Use Spatie Laravel Data for DTOs"
+    description: "All data transfer objects should use Spatie Laravel Data"
+    pattern: "class ([A-Za-z]+)(DTO|Data) "
+    replacement: "final class $1$2 extends \\Spatie\\LaravelData\\Data "
+    instructions: |
+      - Extend Spatie\LaravelData\Data for all DTOs
+      - Use constructor property promotion with readonly properties
+      - Use Data attributes like @dataClass when appropriate
+      - Define casts using appropriate methods
+      - Use computed properties when needed
+      - Follow naming convention: ProductData or ProductDTO
+
+  - name: "Use Spatie Event Sourcing"
+    description: "Use Spatie Event Sourcing for domain events"
+    pattern: "class ([A-Za-z]+Event)"
+    replacement: "final class $1 extends \\Spatie\\EventSourcing\\StoredEvents\\ShouldBeStored"
+    instructions: |
+      - Events should implement ShouldBeStored
+      - Use readonly properties for event data
+      - Include relevant DTOs as properties
+      - Store only serializable data
+
+  - name: "Use Spatie Enum"
+    description: "Use Spatie Enum for enumeration classes"
+    pattern: "enum ([A-Za-z]+)"
+    replacement: "final class $1 extends \\Spatie\\Enum\\Enum"
+    instructions: |
+      - Extend Spatie\Enum\Enum instead of PHP native enums
+      - Define values using static methods
+      - Use proper docblocks for IDE support
+
+  - name: "Use Spatie Media Library"
+    description: "Use Media Library for file uploads and management"
+    pattern: "class ([A-Za-z]+) .* implements HasMedia"
+    instructions: |
+      - Use InteractsWithMedia trait
+      - Define registerMediaCollections() method
+      - Configure conversions in registerMediaConversions()
+      - Use proper media naming conventions
+
+  - name: "Use Spatie Translatable"
+    description: "Use Translatable for multilingual content"
+    pattern: "class ([A-Za-z]+) extends Model"
+    instructions: |
+      - Use HasTranslations trait for translatable models
+      - Define $translatable property with translatable attributes
+      - Use proper accessors/mutators for translations
+      - Follow locale conventions

@@ -1,0 +1,28 @@
+---
+description: ENFORCE style in our application
+globs: *.php, *.blade.php
+alwaysApply: false
+---
+# .cursor/rules
+---
+## PHP Style & Basic Structure
+  - name: "Use strict types declaration"
+        description: "Always add strict_types declaration to PHP files"
+        pattern: "<?php"
+        replacement: "<?php\n\ndeclare(strict_types=1);"
+
+  - name: "Use final classes by default"
+        description: "Make all classes final unless they need to be extended"
+        pattern: "class ([A-Za-z]+)"
+        replacement: "final class $1"
+        excludes: ["abstract class", "interface", "trait"]
+
+## Type Usage
+  - name: "Use type declarations extensively"
+        description: "Add strict type declarations for all methods and properties"
+        instructions: |
+        - Always use typed properties: public string $name
+        - Always specify return types: public function getName(): string
+        - Use constructor property promotion when appropriate
+        - Use readonly properties when possible
+        - Use typed arrays with generics in docblocks: /** @var array<int, string> */
